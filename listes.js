@@ -1,24 +1,23 @@
-function listes(){
+async function listes() {
+    try {
+        const response = await fetch("data.json");
+        const data = await response.json();
 
-    console.log("Chargement du JSON");
-
-    fetch('data.json').then(
-        response => response.json()
-    ).then(data =>{
-
-        console.log(data)
         const userList = document.getElementById("userList");
+        userList.innerHTML = ""; 
 
-        console.log("Parcour la liste data et ajoute dans li");
-
+        
         data.addresses.forEach(email => {
             const li = document.createElement("li");
             li.textContent = email;
             userList.appendChild(li);
-
         });
-    })
-    .catch(error => console.error("Erreur chargement du fichier JSON:", error));
+
+        return data.addresses;
+    } catch (error) {
+        console.error("Erreur lors du chargement du fichier JSON:", error);
+        return [];
+    }
 }
 
-export{listes};
+export { listes };

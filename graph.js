@@ -1,24 +1,34 @@
-function graph(){
-    // Créer le graphique après avoir chargé les données 
-    const ctx = document.getElementById('userChart').getContext('2d');
-    const userChart = new Chart(ctx, {
-        type: 'pie', // Type de graphique (vous pouvez le changer en 'line', 'pie', etc.)
+function graph(emailList) {
+    const domainCount = {};
+
+    emailList.forEach(email => {
+        const domain = email.split("@")[1];
+        domainCount[domain] = (domainCount[domain] || 0) + 1;
+    });
+
+    const ctx = document.getElementById("userChart").getContext("2d");
+    
+    new Chart(ctx, {
+        type: "pie",
         data: {
-            labels: data.addresses.slice(0, 10), // Limiter à 10 adresses pour le graphique  
+            labels: Object.keys(domainCount),
             datasets: [{
-                label: 'Nombre d\'utilisateurs',
-                data: data.addresses.slice(0, 10).map(() => 1), // Valeur fixe de 1 pour chaque adresse  
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1  
+                label: "Nombre d'utilisateurs par domaine",
+                data: Object.values(domainCount),
+                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                borderColor: "rgba(75, 192, 192, 1)",
+                borderWidth: 1
             }]
         },
         options: {
+            responsive: true,
             scales: {
                 y: {
-                    beginAtZero: true  
+                    beginAtZero: true
                 }
             }
         }
-    })
+    });
 }
+
+export { graph };

@@ -15,6 +15,17 @@
     <main>
         <section>
             <h1>Liste des utilisateurs</h1>
+        
+            <div id="filterCheckboxes">
+                <input type="checkbox" id="selectAll"> <label for="selectAll">Tous</label>
+                <input type="checkbox" id="selectYahoo"> <label for="selectYahoo">Yahoo</label>
+                <input type="checkbox" id="selectGmail"> <label for="selectGmail">Gmail</label>
+                <input type="checkbox" id="selectHotmail"> <label for="selectHotmail">Hotmail</label>
+            </div>
+        
+            
+            <input type="text" id="searchBar" placeholder="Filtrer par domaine (ex: gmail.com)" />
+        
             <ul id="userList"></ul>
         </section>
 
